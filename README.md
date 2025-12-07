@@ -27,7 +27,7 @@ This frontend allows users to manage income, expenses, categories, and view mont
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/your-username/finance-tracker-web
+git clone https://github.com/binojmadhuranga/finance-tracker-web
 cd finance-tracker-web
 npm install
 npm run dev
