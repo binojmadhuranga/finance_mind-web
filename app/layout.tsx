@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Finance Tracer",
   description: "AI Intergrated Finance Tracer",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
