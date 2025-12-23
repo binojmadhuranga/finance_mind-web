@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { fetchProfile, logout } from "@/features/auth/authSlice";
+import { fetchProfile, logoutUser } from "@/features/auth/authSlice";
 
 export default function DashboardPage() {
   const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ export default function DashboardPage() {
   }, [dispatch]);
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logoutUser());
     // middleware will redirect to /login
   };
 
