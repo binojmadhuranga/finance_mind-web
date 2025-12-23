@@ -22,10 +22,10 @@ export const loginUser = createAsyncThunk(
   async (credentials: LoginCredentials, { rejectWithValue }) => {
     try {
       const response = await authService.login(credentials);
-      
+
       // Store token in cookie
       document.cookie = `token=${response.token}; path=/; max-age=${7 * 24 * 60 * 60}`; // 7 days
-      
+
       return response;
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -51,6 +51,20 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+export const fetchProfile = createAsyncThunk(
+  "auth/fetchProfile",
+  async (_, { rejectWithValue }) => {
+    try {
+      const user = await authService.me();
+      return user;
+    } catch {
+      return rejectWithValue("Not authenticated");
+    }
+  }
+);
+
+
+
 // Auth slice
 const authSlice = createSlice({
   name: "auth",
@@ -61,7 +75,7 @@ const authSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
       state.error = null;
-      
+
       // Clear token from cookie
       document.cookie = "token=; path=/; max-age=0";
     },
@@ -106,6 +120,24 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload as string;
       });
+
+    // Fetch profile (restore login)
+    builder
+      .addCase(fetchProfile.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchProfile.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+        state.isAuthenticated = true;
+      })
+      .addCase(fetchProfile.rejected, (state) => {
+        state.isLoading = false;
+        state.user = null;
+        state.isAuthenticated = false;
+      });
+
+
   },
 });
 

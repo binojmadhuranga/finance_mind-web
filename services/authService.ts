@@ -38,4 +38,13 @@ export const authService = {
   async login(data: LoginRequest): Promise<LoginResponse> {
     return apiClient.post<LoginResponse>("/auth/login", data);
   },
+
+  async me(): Promise<User> {
+    return apiClient.get<User>("/auth/me");
+  },
+
+  async logout(): Promise<void> {
+    return apiClient.post("/auth/logout");
+  },
+
 };
