@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "next/link";;
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -45,8 +45,11 @@ export default function Navbar() {
 					{/* Brand */}
 					<div className="flex items-center gap-2">
 						<Link href="/" className="flex items-center gap-2">
-							<span className="inline-block h-6 w-6 rounded-md bg-blue-500" />
-							<span className="text-white font-bold md:text-3xl">Finance Tracker</span>
+							<img
+								src="/navImage.png"
+								alt="Finance Tracker"
+								className="h-20 md:h-27 lg:h-35 w-auto"
+							/>
 						</Link>
 					</div>
 

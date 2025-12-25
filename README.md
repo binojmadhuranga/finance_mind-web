@@ -1,4 +1,4 @@
-# 💰 Finance Tracker Web
+# 💰 FinanceMind Web
 
 A modern **AI-Integrated Personal Finance Tracking** web application built with **Next.js 16**, **Redux Toolkit**, and **TailwindCSS**.  
 This frontend allows users to manage income, expenses, categories, and view financial summaries through a clean, responsive, and secure UI.

@@ -3,7 +3,7 @@ import "./globals.css";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
-  title: "Finance Tracker",
+  title: "FinanceMind",
   description: "AI Integrated Finance Tracker",
   icons: {
     icon: "/icon.png",
