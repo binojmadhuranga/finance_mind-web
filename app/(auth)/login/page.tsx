@@ -23,7 +23,8 @@ export default function LoginPage() {
     try {
       const result = await dispatch(loginUser(formData)).unwrap();
       if (result) {
-        router.push("/dashboard");
+        // Use full page reload to ensure middleware sees the cookie
+        window.location.href = "/dashboard";
       }
     } catch (err) {
       // Error is handled by Redux
