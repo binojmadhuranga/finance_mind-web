@@ -21,33 +21,32 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-8">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 p-8 md:p-12 shadow-2xl">
-        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
-          <div className="flex-1 text-white">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
-              Welcome back, {user.name}!
-            </h1>
-            <p className="text-blue-100 text-lg md:text-xl mb-6 md:mb-8">
-              Take control of your finances and achieve your financial goals.
-            </p>
-            <Link
-              href="/transactions"
-              className="inline-block px-6 py-3 md:px-8 md:py-4 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-blue-50 transition-all transform hover:scale-105 text-base md:text-lg"
-            >
-              View Transactions
-            </Link>
-          </div>
-          <div className="flex-shrink-0 w-full md:w-auto">
-            <Image
-              src="/hero.png"
-              alt="Finance Dashboard"
-              width={600}
-              height={450}
-              className="rounded-lg shadow-xl w-full md:w-[500px] lg:w-[600px] h-auto"
-              priority
-            />
-          </div>
+      {/* Hero Section with Background Image */}
+      <div className="relative overflow-hidden rounded-2xl h-64 md:h-80 lg:h-96">
+        <Image
+          src="/hero.png"
+          alt="Finance Dashboard"
+          fill
+          className="object-cover brightness-50"
+          priority
+        />
+        <div className="absolute inset-0 bg-linear-to-r from-blue-900/90 via-purple-900/80 to-transparent z-10" />
+        <div className="relative z-20 h-full flex flex-col justify-center px-8 md:px-12">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6">
+            Welcome back, {user.name}!
+          </h1>
+          <p className="text-blue-100 text-lg md:text-xl max-w-2xl mb-6 md:mb-8">
+            Take control of your finances and achieve your financial goals.
+          </p>
+          <Link
+            href="/transactions"
+            className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-blue-50 transition-all transform hover:scale-105 text-base md:text-lg w-fit"
+          >
+            View Transactions
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </Link>
         </div>
       </div>
 
@@ -114,7 +113,7 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Link
           href="/transactions?action=add-income"
-          className="bg-gradient-to-br from-green-600 to-green-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
+          className="bg-linear-to-br from-green-600 to-green-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
         >
           <div className="flex items-center gap-4">
             <div className="p-3 bg-white/20 rounded-lg group-hover:bg-white/30 transition">
@@ -131,7 +130,7 @@ export default function DashboardPage() {
 
         <Link
           href="/transactions?action=add-expense"
-          className="bg-gradient-to-br from-red-600 to-red-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
+          className="bg-linear-to-br from-red-600 to-red-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
         >
           <div className="flex items-center gap-4">
             <div className="p-3 bg-white/20 rounded-lg group-hover:bg-white/30 transition">
