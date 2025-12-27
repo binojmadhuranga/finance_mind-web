@@ -30,7 +30,7 @@ export default function DashboardPage() {
           className="object-cover brightness-50"
           priority
         />
-        <div className="absolute inset-0 bg-linear-to-r from-blue-900/90 via-purple-900/80 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 via-purple-900/80 to-transparent z-10" />
         <div className="relative z-20 h-full flex flex-col justify-center px-8 md:px-12">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6">
             Welcome back, {user.name}!
@@ -113,7 +113,7 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Link
           href="/transactions?action=add-income"
-          className="bg-linear-to-br from-green-600 to-green-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
+          className="bg-gradient-to-br from-green-600 to-green-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
         >
           <div className="flex items-center gap-4">
             <div className="p-3 bg-white/20 rounded-lg group-hover:bg-white/30 transition">
@@ -130,7 +130,7 @@ export default function DashboardPage() {
 
         <Link
           href="/transactions?action=add-expense"
-          className="bg-linear-to-br from-red-600 to-red-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
+          className="bg-gradient-to-br from-red-600 to-red-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
         >
           <div className="flex items-center gap-4">
             <div className="p-3 bg-white/20 rounded-lg group-hover:bg-white/30 transition">
