@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, FormEvent } from "react";
+import Image from "next/image";
 import { 
 	categoryService, 
 	Category, 
@@ -135,23 +136,37 @@ export default function CategoriesPage() {
 	const incomeCategories = categories.filter(c => c.type === "income");
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-8 px-4 sm:px-6 lg:px-8">
-			<div className="max-w-6xl mx-auto">
-				{/* Header */}
-				<div className="flex justify-between items-center mb-8">
-					<div>
-						<h1 className="text-3xl font-bold text-white mb-2">Categories</h1>
-						<p className="text-slate-300">Manage your transaction categories</p>
-					</div>
+		<div className="space-y-6">
+			{/* Hero Section with Background Image */}
+			<div className="relative overflow-hidden rounded-2xl h-64 md:h-80">
+				<Image
+					src="/category.png"
+					alt="Categories"
+					fill
+					className="object-cover brightness-50"
+					priority
+				/>
+				<div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 via-purple-900/80 to-transparent z-10" />
+				<div className="relative z-20 h-full flex flex-col justify-center px-8 md:px-12">
+					<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+						Categories
+					</h1>
+					<p className="text-blue-100 text-lg md:text-xl max-w-2xl mb-6">
+						Organize your finances. Create and manage categories for your income and expenses.
+					</p>
 					<button
 						onClick={() => setShowAddModal(true)}
-						className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+						className="inline-flex items-center gap-2 px-6 py-3 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-blue-50 transition-all transform hover:scale-105 w-fit"
 					>
-						+ Add Category
+						<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+						</svg>
+						Add Category
 					</button>
 				</div>
+			</div>
 
-				{/* Error Message */}
+			<div className="max-w-6xl mx-auto">{/* Error Message */}
 				{error && (
 					<div className="mb-6 bg-red-500/20 border border-red-500 text-red-200 px-4 py-3 rounded-lg">
 						{error}
@@ -298,7 +313,7 @@ export default function CategoriesPage() {
 				onUpdate={handleUpdate}
 				submitting={submitting}
 			/>
-			</div>
-		</div>
+				</div>
+	</div>
 	);
 }
