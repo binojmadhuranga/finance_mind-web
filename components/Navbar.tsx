@@ -57,6 +57,7 @@ export default function Navbar() {
 					<div className="hidden md:flex items-center gap-2">
 						{navLink("/dashboard", "Dashboard")}
 						{navLink("/transactions", "Transactions")}
+						{navLink("/categories", "Categories")}
 					</div>
 
 					{/* Right side */}
@@ -123,6 +124,7 @@ export default function Navbar() {
 					<div className="space-y-1 px-2 pt-2 pb-3">
 						{navLink("/dashboard", "Dashboard")}
 						{navLink("/transactions", "Transactions")}
+						{navLink("/categories", "Categories")}
 						{isAuthenticated ? (
 							<button
 								onClick={handleLogout}

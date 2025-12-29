@@ -107,4 +107,14 @@ export const transactionService = {
     
     return apiClient.get(endpoint);
   },
+
+  /**
+   * Search transactions by query
+   */
+  async searchTransactions(query: string): Promise<Transaction[]> {
+    const queryParams = new URLSearchParams();
+    queryParams.append("query", query);
+    
+    return apiClient.get<Transaction[]>(`/transactions/search?${queryParams.toString()}`);
+  },
 };
