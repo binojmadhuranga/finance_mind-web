@@ -6,9 +6,10 @@ export interface Category {
   id: number;
   name: string;
   type: CategoryType;
-  userId: number;
-  createdAt: string;
-  updatedAt: string;
+  totalAmount: string;
+  userId?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface CreateCategoryRequest {

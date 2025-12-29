@@ -16,8 +16,8 @@ export default function CategoryCard({ category, onEdit, onDelete }: CategoryCar
 			<div className="flex justify-between items-start">
 				<div className="flex-1">
 					<h3 className="text-white font-medium">{category.name}</h3>
-					<p className="text-slate-400 text-sm">
-						Created {new Date(category.createdAt).toLocaleDateString()}
+					<p className={`text-${isExpense ? 'red' : 'green'}-400 text-lg font-semibold mt-1`}>
+						${parseFloat(category.totalAmount).toFixed(2)}
 					</p>
 				</div>
 				<div className="flex items-center gap-2">
