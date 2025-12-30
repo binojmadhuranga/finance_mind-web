@@ -9,18 +9,13 @@ import { loginUser, clearError } from "@/features/auth/authSlice";
 export default function LoginPage() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { isLoading, error, isAuthenticated  } = useAppSelector((state) => state.auth);
+  const { isLoading, error, isAuthenticated } = useAppSelector((state) => state.auth);
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-    useEffect(() => {
-    if (isAuthenticated) {
-      router.push("/dashboard");
-    }
-  }, [isAuthenticated, router]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,12 +23,8 @@ export default function LoginPage() {
 
     try {
       const result = await dispatch(loginUser(formData)).unwrap();
-      // if (result) {
-       
-      //   window.location.href = "/dashboard";
-      // }
+      router.replace("/dashboard");
     } catch (err) {
-      
       console.error("Login failed:", err);
     }
   };
