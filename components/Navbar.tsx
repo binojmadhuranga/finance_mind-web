@@ -58,6 +58,7 @@ export default function Navbar() {
 						{navLink("/dashboard", "Dashboard")}
 						{navLink("/transactions", "Transactions")}
 						{navLink("/categories", "Categories")}
+						{navLink("/aifeatures", "AI Features")}
 					</div>
 
 					{/* Right side */}
@@ -125,6 +126,7 @@ export default function Navbar() {
 						{navLink("/dashboard", "Dashboard")}
 						{navLink("/transactions", "Transactions")}
 						{navLink("/categories", "Categories")}
+						{navLink("/aifeatures", "AI Features")}
 						{isAuthenticated ? (
 							<button
 								onClick={handleLogout}
