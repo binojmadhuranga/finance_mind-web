@@ -11,6 +11,7 @@ import {
 import { categoryService, Category } from "@/services/categoryService";
 import TransactionForm from "@/components/TransactionForm";
 import TransactionList from "@/components/TransactionList";
+import CategoryDistributionChart from "@/components/CategoryDistributionChart";
 
 type TransactionType = "all" | "income" | "expense";
 
@@ -476,6 +477,11 @@ export default function TransactionsPage() {
 					</div>
 				</div>
 			)}
+			
+			{/* Category Distribution Chart */}
+			<div className="mt-8">
+				<CategoryDistributionChart categories={categories} loading={loadingCategories} />
+			</div>
 		</div>
 	);
 }

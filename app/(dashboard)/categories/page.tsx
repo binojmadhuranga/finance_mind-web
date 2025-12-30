@@ -11,6 +11,7 @@ import {
 } from "@/services/categoryService";
 import CategoryCard from "@/components/CategoryCard";
 import EditCategoryModal from "@/components/EditCategoryModal";
+import CategoryOverviewChart from "@/components/CategoryOverviewChart";
 
 export default function CategoriesPage() {
 	const [categories, setCategories] = useState<Category[]>([]);
@@ -313,6 +314,11 @@ export default function CategoriesPage() {
 				onUpdate={handleUpdate}
 				submitting={submitting}
 			/>
+			
+			{/* Category Overview Chart */}
+			<div className="mt-8">
+				<CategoryOverviewChart categories={categories} loading={loading} />
+			</div>
 				</div>
 	</div>
 	);
