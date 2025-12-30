@@ -16,19 +16,14 @@ const initialState: AuthState = {
 };
 
 // Async thunks
+
 export const loginUser = createAsyncThunk(
   "auth/login",
   async (credentials: LoginCredentials, { rejectWithValue }) => {
     try {
-
-      await authService.login(credentials);
-      const user = await authService.me();
-
-      return user;
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        return rejectWithValue(error.message);
-      }
+      const response = await authService.login(credentials);
+      return response.user; 
+    } catch (error) {
       return rejectWithValue("Login failed");
     }
   }
@@ -39,20 +34,14 @@ export const registerUser = createAsyncThunk(
   "auth/register",
   async (credentials: RegisterCredentials, { rejectWithValue }) => {
     try {
-      await authService.register(credentials);
-
-      // Auto-login after register
-      const user = await authService.me();
-
-      return user;
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        return rejectWithValue(error.message);
-      }
+      const response = await authService.register(credentials);
+      return response.user;
+    } catch {
       return rejectWithValue("Registration failed");
     }
   }
 );
+
 
 
 export const fetchProfile = createAsyncThunk(

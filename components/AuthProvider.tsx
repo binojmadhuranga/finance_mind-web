@@ -18,10 +18,7 @@ export default function AuthProvider({
     setIsMounted(true);
     const restoreSession = async () => {
       try {
-        await dispatch(fetchProfile()).unwrap();
-      } catch (error) {
-        // No valid session - middleware will handle redirect
-        console.log("No active session");
+        await dispatch(fetchProfile());
       } finally {
         setIsInitializing(false);
       }

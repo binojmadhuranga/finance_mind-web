@@ -1,4 +1,4 @@
-const API_BASE_URL =  process.env.NEXT_PUBLIC_API_URL ??
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ??
   "http://localhost:5000/api";
 
 export const apiClient = {
@@ -7,7 +7,7 @@ export const apiClient = {
     options?: RequestInit
   ): Promise<T> {
     const url = `${API_BASE_URL}${endpoint}`;
-    
+
     const config: RequestInit = {
       ...options,
       credentials: "include",
@@ -29,15 +29,16 @@ export const apiClient = {
     try {
       const response = await fetch(url, config);
 
+      // Handle auth session check gracefully
+      if (response.status === 401) {
+        // For /auth/me, 401 means "not logged in", NOT an error
+        throw new Error("UNAUTHORIZED");
+      }
+
       if (!response.ok) {
         const error = await response.json().catch(() => ({
           message: "An error occurred",
         }));
-        console.error('API Error Response:', {
-          status: response.status,
-          statusText: response.statusText,
-          error
-        });
         throw new Error(error.message || `HTTP error! status: ${response.status}`);
       }
 
