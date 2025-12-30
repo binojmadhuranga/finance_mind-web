@@ -30,14 +30,23 @@ export default function AIFeaturesPage() {
 
   const handleGetSuggestions = async () => {
     if (!period.trim()) {
-      setError("Please enter a period (e.g., March 2025)");
+      setError("Please select a period");
       return;
     }
 
     try {
       setLoading(true);
       setError(null);
-      const response = await aiService.getSuggestions(period);
+      
+      // Convert date format (2025-03) to "March 2025"
+      const [year, month] = period.split("-");
+      const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+      const formattedPeriod = `${monthNames[parseInt(month) - 1]} ${year}`;
+      
+      const response = await aiService.getSuggestions(formattedPeriod);
       
       if (response.success) {
         setSuggestions(response.data.suggestions);
@@ -127,19 +136,18 @@ export default function AIFeaturesPage() {
             <Card title="AI Financial Suggestions">
           <div className="space-y-4">
             <div>
-              <label htmlFor="period" className="block text-sm font-medium text-blue-200 mb-2">
-                Enter Period
+              <label htmlFor="period" className="block text-sm font-medium text-slate-300 mb-2">
+                Select Period
               </label>
               <input
-                type="text"
+                type="month"
                 id="period"
                 value={period}
                 onChange={(e) => setPeriod(e.target.value)}
-                placeholder="e.g., March 2025"
-                className="w-full px-4 py-2 bg-blue-900 border border-blue-700 rounded-lg text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
-              <p className="mt-1 text-xs text-blue-400">
-                Format: Month Year (e.g., March 2025, January 2024)
+              <p className="mt-1 text-xs text-slate-500">
+                Select a month and year to get AI financial suggestions
               </p>
             </div>
 
