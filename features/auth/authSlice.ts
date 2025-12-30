@@ -20,32 +20,40 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async (credentials: LoginCredentials, { rejectWithValue }) => {
     try {
-      const response = await authService.login(credentials);
-      // Cookie is automatically set by the backend via Set-Cookie header
-      return response;
+
+      await authService.login(credentials);
+      const user = await authService.me();
+
+      return user;
     } catch (error: unknown) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);
       }
-      return rejectWithValue("An unexpected error occurred");
+      return rejectWithValue("Login failed");
     }
   }
 );
+
 
 export const registerUser = createAsyncThunk(
   "auth/register",
   async (credentials: RegisterCredentials, { rejectWithValue }) => {
     try {
-      const response = await authService.register(credentials);
-      return response;
+      await authService.register(credentials);
+
+      // Auto-login after register
+      const user = await authService.me();
+
+      return user;
     } catch (error: unknown) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);
       }
-      return rejectWithValue("An unexpected error occurred");
+      return rejectWithValue("Registration failed");
     }
   }
 );
+
 
 export const fetchProfile = createAsyncThunk(
   "auth/fetchProfile",
@@ -101,10 +109,11 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user;
+        state.user = action.payload;
         state.isAuthenticated = true;
         state.error = null;
       })
+
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload as string;
@@ -115,10 +124,12 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(registerUser.fulfilled, (state) => {
+      .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.error = null;
+        state.user = action.payload;
+        state.isAuthenticated = true;
       })
+
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload as string;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -9,12 +9,18 @@ import { loginUser, clearError } from "@/features/auth/authSlice";
 export default function LoginPage() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { isLoading, error } = useAppSelector((state) => state.auth);
+  const { isLoading, error, isAuthenticated  } = useAppSelector((state) => state.auth);
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+    useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/dashboard");
+    }
+  }, [isAuthenticated, router]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,12 +28,12 @@ export default function LoginPage() {
 
     try {
       const result = await dispatch(loginUser(formData)).unwrap();
-      if (result) {
-        // Use full page reload to ensure middleware sees the cookie
-        window.location.href = "/dashboard";
-      }
+      // if (result) {
+       
+      //   window.location.href = "/dashboard";
+      // }
     } catch (err) {
-      // Error is handled by Redux
+      
       console.error("Login failed:", err);
     }
   };
