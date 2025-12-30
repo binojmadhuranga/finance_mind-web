@@ -11,6 +11,7 @@ export const apiClient = {
     const config: RequestInit = {
       ...options,
       credentials: "include",
+      cache: "no-store",
       headers: {
         "Content-Type": "application/json",
         ...options?.headers,
