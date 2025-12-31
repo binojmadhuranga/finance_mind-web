@@ -85,7 +85,7 @@ export default function DashboardPage() {
           </p>
           <Link
             href="/transactions"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-4 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-blue-50 active:bg-blue-100 transition-all transform hover:scale-105 active:scale-100 text-sm sm:text-base md:text-lg w-full sm:w-auto max-w-xs sm:max-w-none"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-blue-50 active:bg-blue-100 transition-all transform hover:scale-105 active:scale-100 text-sm sm:text-base w-full sm:w-auto max-w-xs sm:max-w-none"
           >
             View Transactions
             <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
