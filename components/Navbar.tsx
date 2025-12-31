@@ -44,7 +44,7 @@ export default function Navbar() {
 				<div className="flex h-16 sm:h-20 lg:h-24 items-center justify-between">
 					{/* Brand */}
 					<div className="flex items-center flex-shrink-0">
-						<Link href="/" className="flex items-center">
+						<Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
 							<img
 								src="/navImage.png"
 								alt="Finance Tracker"
@@ -55,10 +55,14 @@ export default function Navbar() {
 
 					{/* Desktop nav */}
 					<div className="hidden md:flex items-center gap-2">
-						{navLink("/dashboard", "Dashboard")}
-						{navLink("/transactions", "Transactions")}
-						{navLink("/categories", "Categories")}
-						{navLink("/aifeatures", "AI Features")}
+						{isAuthenticated && (
+							<>
+								{navLink("/dashboard", "Dashboard")}
+								{navLink("/transactions", "Transactions")}
+								{navLink("/categories", "Categories")}
+								{navLink("/aifeatures", "AI Features")}
+							</>
+						)}
 					</div>
 
 					{/* Right side */}
@@ -122,7 +126,7 @@ export default function Navbar() {
 
 			{/* Mobile drawer backdrop */}
 			<div 
-				className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden transition-opacity duration-300 ${
+				className={`fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm md:hidden transition-opacity duration-300 ${
 					open ? 'opacity-100' : 'opacity-0 pointer-events-none'
 				}`}
 				onClick={() => setOpen(false)}
@@ -131,7 +135,7 @@ export default function Navbar() {
 
 			{/* Mobile drawer menu */}
 			<div 
-				className={`md:hidden fixed top-0 left-0 bottom-0 z-50 w-72 bg-slate-900 shadow-2xl transform transition-transform duration-300 ease-in-out ${
+				className={`md:hidden fixed top-0 left-0 bottom-0 z-[70] w-72 bg-slate-900 border-r border-slate-700 shadow-2xl transform transition-transform duration-300 ease-in-out ${
 					open ? 'translate-x-0' : '-translate-x-full'
 				}`}
 			>
@@ -182,10 +186,18 @@ export default function Navbar() {
 							<p className="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">
 								Menu
 							</p>
-							{navLink("/dashboard", "Dashboard")}
-							{navLink("/transactions", "Transactions")}
-							{navLink("/categories", "Categories")}
-							{navLink("/aifeatures", "AI Features")}
+							{isAuthenticated ? (
+								<>
+									{navLink("/dashboard", "Dashboard")}
+									{navLink("/transactions", "Transactions")}
+									{navLink("/categories", "Categories")}
+									{navLink("/aifeatures", "AI Features")}
+								</>
+							) : (
+								<p className="px-3 py-2 text-sm text-slate-400">
+									Please log in to access features
+								</p>
+							)}
 						</nav>
 					</div>
 
