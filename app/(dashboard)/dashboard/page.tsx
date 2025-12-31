@@ -64,30 +64,31 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 md:space-y-8">
       {/* Hero Section with Background Image */}
-      <div className="relative overflow-hidden rounded-2xl h-64 md:h-80 lg:h-96">
+      <div className="relative overflow-hidden rounded-xl md:rounded-2xl h-80 sm:h-96 md:h-[28rem] lg:h-[32rem]">
         <Image
           src="/hero.png"
           alt="Finance Dashboard"
           fill
-          className="object-cover brightness-50"
+          className="object-cover object-center brightness-50"
           priority
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 via-purple-900/80 to-transparent z-10" />
-        <div className="relative z-20 h-full flex flex-col justify-center px-8 md:px-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6">
-            Welcome back, {user.name}!
+        <div className="relative z-20 h-full flex flex-col justify-center px-4 sm:px-6 md:px-10 lg:px-12">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
+            Welcome back,<br className="sm:hidden" /> {user.name}!
           </h1>
-          <p className="text-blue-100 text-lg md:text-xl max-w-2xl mb-6 md:mb-8">
+          <p className="text-blue-100 text-sm sm:text-base md:text-lg lg:text-xl max-w-2xl mb-4 sm:mb-6 md:mb-8 leading-relaxed">
             Take control of your finances and achieve your financial goals.
           </p>
           <Link
             href="/transactions"
-            className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-blue-50 transition-all transform hover:scale-105 text-base md:text-lg w-fit"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-4 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-blue-50 active:bg-blue-100 transition-all transform hover:scale-105 active:scale-100 text-sm sm:text-base md:text-lg w-full sm:w-auto max-w-xs sm:max-w-none"
           >
             View Transactions
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </Link>
@@ -95,8 +96,8 @@ export default function DashboardPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-4 sm:p-5 md:p-6 shadow-lg hover:shadow-xl transition-shadow">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-slate-400 text-sm font-medium">Total Balance</h3>
             <div className="p-2 bg-green-500/10 rounded-lg">
@@ -111,7 +112,7 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+        <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-4 sm:p-5 md:p-6 shadow-lg hover:shadow-xl transition-shadow">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-slate-400 text-sm font-medium">Total Income</h3>
             <div className="p-2 bg-blue-500/10 rounded-lg">
@@ -126,7 +127,7 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+        <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-4 sm:p-5 md:p-6 shadow-lg hover:shadow-xl transition-shadow">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-slate-400 text-sm font-medium">Total Expenses</h3>
             <div className="p-2 bg-red-500/10 rounded-lg">
@@ -143,9 +144,9 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 shadow-lg">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-white">Recent Transactions</h2>
+      <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-4 sm:p-5 md:p-6 shadow-lg">
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
+          <h2 className="text-lg sm:text-xl font-bold text-white">Recent Transactions</h2>
           <Link
             href="/transactions"
             className="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center gap-1"
@@ -190,33 +191,33 @@ export default function DashboardPage() {
 
         {/* Transactions List */}
         {!loadingTransactions && !error && recentTransactions.length > 0 && (
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             {recentTransactions.map((transaction) => (
               <div
                 key={transaction.id}
-                className="flex items-center justify-between p-4 bg-slate-900/30 rounded-lg hover:bg-slate-900/50 transition"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 p-3 sm:p-4 bg-slate-900/30 rounded-lg hover:bg-slate-900/50 transition"
               >
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
                   <div
-                    className={`p-2.5 rounded-lg ${
+                    className={`p-2 sm:p-2.5 rounded-lg flex-shrink-0 ${
                       transaction.type === "income"
                         ? "bg-green-500/10 text-green-400"
                         : "bg-red-500/10 text-red-400"
                     }`}
                   >
                     {transaction.type === "income" ? (
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                       </svg>
                     ) : (
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
                       </svg>
                     )}
                   </div>
-                  <div>
-                    <h4 className="text-white font-medium">{transaction.note}</h4>
-                    <p className="text-slate-400 text-sm">
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-white font-medium text-sm sm:text-base truncate">{transaction.note}</h4>
+                    <p className="text-slate-400 text-xs sm:text-sm">
                       {isMounted
                         ? new Date(transaction.date).toLocaleDateString("en-US", {
                             year: "numeric",
@@ -227,9 +228,9 @@ export default function DashboardPage() {
                     </p>
                   </div>
                 </div>
-                <div className="text-right">
+                <div className="flex items-center justify-between sm:flex-col sm:items-end sm:text-right pl-9 sm:pl-0">
                   <p
-                    className={`text-lg font-bold ${
+                    className={`text-base sm:text-lg font-bold ${
                       transaction.type === "income" ? "text-green-400" : "text-red-400"
                     }`}
                   >
@@ -244,37 +245,37 @@ export default function DashboardPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
         <Link
           href="/transactions?action=add-income"
-          className="bg-gradient-to-br from-green-600 to-green-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
+          className="bg-gradient-to-br from-green-600 to-green-700 rounded-xl p-4 sm:p-5 md:p-6 shadow-lg hover:shadow-xl active:shadow-md transition-all transform hover:scale-105 active:scale-100 group"
         >
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-white/20 rounded-lg group-hover:bg-white/30 transition">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="p-2.5 sm:p-3 bg-white/20 rounded-lg group-hover:bg-white/30 transition flex-shrink-0">
+              <svg className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
             </div>
-            <div>
-              <h3 className="text-xl font-bold text-white">Add Income</h3>
-              <p className="text-green-100">Record money received</p>
+            <div className="min-w-0">
+              <h3 className="text-base sm:text-lg md:text-xl font-bold text-white">Add Income</h3>
+              <p className="text-green-100 text-sm sm:text-base">Record money received</p>
             </div>
           </div>
         </Link>
 
         <Link
           href="/transactions?action=add-expense"
-          className="bg-gradient-to-br from-red-600 to-red-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
+          className="bg-gradient-to-br from-red-600 to-red-700 rounded-xl p-4 sm:p-5 md:p-6 shadow-lg hover:shadow-xl active:shadow-md transition-all transform hover:scale-105 active:scale-100 group"
         >
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-white/20 rounded-lg group-hover:bg-white/30 transition">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="p-2.5 sm:p-3 bg-white/20 rounded-lg group-hover:bg-white/30 transition flex-shrink-0">
+              <svg className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
               </svg>
             </div>
-            <div>
-              <h3 className="text-xl font-bold text-white">Add Expense</h3>
-              <p className="text-red-100">Record money spent</p>
+            <div className="min-w-0">
+              <h3 className="text-base sm:text-lg md:text-xl font-bold text-white">Add Expense</h3>
+              <p className="text-red-100 text-sm sm:text-base">Record money spent</p>
             </div>
           </div>
         </Link>

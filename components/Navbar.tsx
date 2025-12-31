@@ -120,49 +120,111 @@ export default function Navbar() {
 				</div>
 			</div>
 
-			{/* Mobile menu backdrop */}
-			{open && (
-				<div 
-					className="fixed inset-0 z-40 bg-black/50 md:hidden"
-					onClick={() => setOpen(false)}
-					aria-hidden="true"
-				/>
-			)}
-
-			{/* Mobile menu */}
+			{/* Mobile drawer backdrop */}
 			<div 
-				className={`md:hidden fixed top-16 sm:top-20 left-0 right-0 z-40 border-t border-slate-700 bg-slate-900 shadow-xl transition-all duration-300 ease-in-out ${
-					open 
-						? 'opacity-100 translate-y-0 max-h-[calc(100vh-4rem)]' 
-						: 'opacity-0 -translate-y-2 max-h-0 pointer-events-none'
+				className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden transition-opacity duration-300 ${
+					open ? 'opacity-100' : 'opacity-0 pointer-events-none'
+				}`}
+				onClick={() => setOpen(false)}
+				aria-hidden="true"
+			/>
+
+			{/* Mobile drawer menu */}
+			<div 
+				className={`md:hidden fixed top-0 left-0 bottom-0 z-50 w-72 bg-slate-900 shadow-2xl transform transition-transform duration-300 ease-in-out ${
+					open ? 'translate-x-0' : '-translate-x-full'
 				}`}
 			>
-				<div className="overflow-y-auto overscroll-contain max-h-[calc(100vh-4rem)] sm:max-h-[calc(100vh-5rem)]">
-					<div className="space-y-1 px-3 py-4">
+				{/* Drawer header */}
+				<div className="flex items-center justify-between px-4 py-4 border-b border-slate-700">
+					<div className="flex items-center gap-2">
+						<img
+							src="/navImage.png"
+							alt="Finance Tracker"
+							className="h-10 w-auto"
+						/>
+					</div>
+					<button
+						onClick={() => setOpen(false)}
+						className="inline-flex items-center justify-center rounded-lg p-2 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"
+						aria-label="Close menu"
+					>
+						<svg
+							className="h-6 w-6"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2}
+								d="M6 18L18 6M6 6l12 12"
+							/>
+						</svg>
+					</button>
+				</div>
+
+				{/* Drawer content */}
+				<div className="flex flex-col h-[calc(100%-4rem)] overflow-y-auto">
+					<div className="flex-1 px-4 py-6">
+						{/* User info */}
 						{isAuthenticated && user && (
-							<div className="px-3 py-3 mb-2 rounded-lg bg-slate-800 border border-slate-700">
+							<div className="px-4 py-3 mb-4 rounded-lg bg-gradient-to-r from-slate-800 to-slate-800/50 border border-slate-700">
 								<p className="text-xs text-slate-400 mb-1">Signed in as</p>
-								<p className="text-sm font-medium text-white truncate">{user.name}</p>
+								<p className="text-base font-semibold text-white truncate">{user.name}</p>
 							</div>
 						)}
-						{navLink("/dashboard", "Dashboard")}
-						{navLink("/transactions", "Transactions")}
-						{navLink("/categories", "Categories")}
-						{navLink("/aifeatures", "AI Features")}
+
+						{/* Navigation links */}
+						<nav className="space-y-2">
+							<p className="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+								Menu
+							</p>
+							{navLink("/dashboard", "Dashboard")}
+							{navLink("/transactions", "Transactions")}
+							{navLink("/categories", "Categories")}
+							{navLink("/aifeatures", "AI Features")}
+						</nav>
+					</div>
+
+					{/* Drawer footer */}
+					<div className="border-t border-slate-700 px-4 py-4">
 						{isAuthenticated ? (
 							<button
 								onClick={handleLogout}
-								className="mt-2 w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium bg-red-600 text-white hover:bg-red-700 active:bg-red-800 transition-colors"
+								className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-medium bg-red-600 text-white hover:bg-red-700 active:bg-red-800 transition-colors"
 							>
+								<svg
+									className="h-5 w-5"
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+									/>
+								</svg>
 								Logout
 							</button>
 						) : (
-							<div className="space-y-1 pt-2">
-								{navLink("/login", "Login")}
+							<div className="space-y-2">
+								<Link
+									href="/login"
+									onClick={() => setOpen(false)}
+									className="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-medium border border-slate-600 text-white hover:bg-slate-800 transition-colors"
+								>
+									Login
+								</Link>
 								<Link
 									href="/register"
 									onClick={() => setOpen(false)}
-									className="block w-full text-center px-3 py-2.5 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 transition-colors"
+									className="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 transition-colors"
 								>
 									Sign up
 								</Link>
