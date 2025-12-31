@@ -39,8 +39,8 @@ export default function Navbar() {
 	);
 
 	return (
-		<nav className="sticky top-0 z-50 w-full border-b border-slate-700 bg-slate-900/95 backdrop-blur-md shadow-lg">
-			<div className="relative z-50 mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+		<nav className="sticky top-0 z-[100] w-full border-b border-slate-700 bg-slate-900/95 backdrop-blur-md shadow-lg">
+			<div className="relative z-10 mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
 				<div className="flex h-16 sm:h-20 lg:h-24 items-center justify-between">
 					{/* Brand */}
 					<div className="relative z-10 flex items-center flex-shrink-0">
@@ -126,8 +126,8 @@ export default function Navbar() {
 
 			{/* Mobile drawer backdrop */}
 			<div 
-				className={`fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm md:hidden transition-opacity duration-300 ${
-					open ? 'opacity-100' : 'opacity-0 pointer-events-none'
+				className={`fixed inset-0 bg-black/60 backdrop-blur-sm md:hidden transition-opacity duration-300 ${
+					open ? 'opacity-100 z-[9998]' : 'opacity-0 pointer-events-none -z-10'
 				}`}
 				onClick={() => setOpen(false)}
 				aria-hidden="true"
@@ -135,12 +135,12 @@ export default function Navbar() {
 
 			{/* Mobile drawer menu */}
 			<div 
-				className={`md:hidden fixed top-0 left-0 bottom-0 z-[70] w-72 bg-slate-900 border-r border-slate-700 shadow-2xl transform transition-transform duration-300 ease-in-out ${
+				className={`md:hidden fixed top-0 left-0 bottom-0 z-[9999] w-72 bg-slate-900 border-r border-slate-700 shadow-2xl transform transition-transform duration-300 ease-in-out ${
 					open ? 'translate-x-0' : '-translate-x-full'
 				}`}
 			>
 				{/* Drawer header */}
-				<div className="flex items-center justify-between px-4 py-4 border-b border-slate-700">
+				<div className="relative z-10 flex items-center justify-between px-4 py-4 border-b border-slate-700 bg-slate-900">
 					<div className="flex items-center gap-2">
 						<img
 							src="/navImage.png"
@@ -171,7 +171,7 @@ export default function Navbar() {
 				</div>
 
 				{/* Drawer content */}
-				<div className="flex flex-col h-[calc(100%-4rem)] overflow-y-auto">
+				<div className="relative z-10 flex flex-col h-[calc(100%-4rem)] overflow-y-auto bg-slate-900">
 					<div className="flex-1 px-4 py-6">
 						{/* User info */}
 						{isAuthenticated && user && (
@@ -202,7 +202,7 @@ export default function Navbar() {
 					</div>
 
 					{/* Drawer footer */}
-					<div className="border-t border-slate-700 px-4 py-4">
+					<div className="relative z-10 border-t border-slate-700 px-4 py-4 bg-slate-900">
 						{isAuthenticated ? (
 							<button
 								onClick={handleLogout}
